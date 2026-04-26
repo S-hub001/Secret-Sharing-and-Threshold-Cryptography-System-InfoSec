@@ -161,9 +161,9 @@ This module focuses on system security, integrity protection, and attack simulat
 ## 🔐 SECURITY FEATURES IMPLEMENTED
 
 ### 1. Integrity Protection (HMAC System)
-Each share is protected using HMAC-SHA256
-Generated during share creation (admin module)
-Verified before reconstruction
+- Each share is protected using HMAC-SHA256
+- Generated during share creation (admin module)
+- Verified before reconstruction
 #### ✔ Purpose:
 Prevents:
 Share tampering
