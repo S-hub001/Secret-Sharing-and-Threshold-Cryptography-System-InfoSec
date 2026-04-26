@@ -110,7 +110,7 @@ This module handles all system logic, APIs, and database interactions.
 ---
 
 ## ⚙️ Execution & Testing
-***Step 1: Create Project Folder***
+***Step 1: Download and Navigate to Project Folder***
 ```
 Secret-Sharing-and-Threshold-Cryptography-System-InfoSec/
 ```
