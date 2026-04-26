@@ -152,10 +152,154 @@ click `send`. The result was successfully added to the database, with hashed pas
 ---
 
 # 🔐 Security & Attack Simulation (Member 3)
-*add your part*
+
 ## 📌 Responsibilities
-## ✨ Features Implemented
+This module focuses on system security, integrity protection, and attack simulation against Shamir Secret Sharing-based key reconstruction.
+
+---
+
+## 🔐 SECURITY FEATURES IMPLEMENTED
+
+### 1. Integrity Protection (HMAC System)
+Each share is protected using HMAC-SHA256
+Generated during share creation (admin module)
+Verified before reconstruction
+#### ✔ Purpose:
+Prevents:
+Share tampering
+Data modification attacks
+
+---
+
+### 2. Threshold Security Enforcement
+System uses Shamir Secret Sharing (k-of-n)
+Minimum k shares required for reconstruction
+Global threshold controlled via admin module
+
+---
+
+### 3. Secure Reconstruction Pipeline
+
+#### Before reconstructing secret:
+##### System verifies:
+✔ Threshold condition (k shares required)
+✔ HMAC integrity of each share
+✔ Valid numeric format of shares
+✔ No duplicate share usage
+
+---
+
+### 4. Attack Simulation Module
+
+#### Implements controlled red-team attacks:
+Attack 1: Insufficient shares
+Attack 2: Share tampering
+Attack 3: Brute force feasibility analysis
+Attack 4: Insider collusion simulation
+
+---
+
 ## ⚙️ Execution & Testing 
+
+*** Step 1: Run Project
+uvicorn app:app --reload
+
+Open:
+
+http://127.0.0.1:8000/docs
+
+*** Step 2: Generate Key
+POST /admin/generate-key
+k = 3
+n = 5
+🔹 Step 3: Submit Shares
+POST /executive/submit-share?share_x=1
+POST /executive/submit-share?share_x=2
+POST /executive/submit-share?share_x=3
+🔹 Step 4: Normal Reconstruction
+POST /executive/reconstruct
+
+✔ Secret successfully reconstructed if valid shares exist
+
+💣 ATTACK SIMULATIONS (WEB TESTING)
+🔴 ATTACK 1 — Insufficient Shares
+Method:
+
+Submit only 2 shares when k = 3
+
+POST /executive/reconstruct
+Result:
+ERROR: Not enough shares submitted
+Why:
+
+Threshold condition fails.
+
+🔴 ATTACK 2 — Share Tampering
+Method:
+POST /admin/tamper-share
+
+Modify share_y manually
+
+Then:
+
+POST /executive/reconstruct
+Result:
+ERROR: Tampered share detected
+Why:
+
+HMAC verification fails.
+
+🔴 ATTACK 3 — Brute Force Attack
+Method:
+POST /executive/attack/bruteforce
+Result:
+FAILED: computationally infeasible
+Why brute force does NOT work:
+Shamir uses polynomial of degree k-1
+With less than k shares:
+Infinite possible solutions exist
+Search space:
+p
+(k−1)
+
+👉 Practically impossible for large prime fields (e.g., 256-bit)
+
+✔ So attacker cannot guess secret
+
+🔴 ATTACK 4 — Insider Collusion Attack
+Method:
+POST /executive/attack/insider
+Simulation:
+Only 2 executives collude
+System enforces:
+threshold check
+HMAC validation
+duplicate detection
+Result:
+BLOCKED OR FAILED
+Why insider attack fails:
+Less than k shares reveal NOTHING
+Polynomial cannot be reconstructed
+Even colluding users gain no information
+🧠 IMPORTANT SECURITY INSIGHT
+Attack Type	Result
+Insufficient shares	Blocked
+Tampering	Detected via HMAC
+Brute force	Computationally impossible
+Insider collusion	No information leakage
+📊 LOGGING SYSTEM
+
+All events logged in:
+
+system_logs.txt
+
+Logs include:
+
+Reconstruction attempts
+Failed authentication
+Tampered share detection
+Attack attempts (3 & 4)
+
 
 ---
 

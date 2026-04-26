@@ -15,6 +15,7 @@ from crypto_engine import generate_shares
 from security import hash_password
 from utils.aes_service import generate_aes_key
 from schemas import UserCreate, UserResponse
+from utils.hmac_service import generate_hmac
 
 import base64
 
@@ -73,15 +74,33 @@ def generate_key(k: int, n: int, db: Session = Depends(get_db)):
 
     # Store shares in DB
     for share_x, share_y in shares:
+
+        share_y_str = str(share_y)
+
         share = Share(
             user_id=None,  # assign later to executives
             share_x=share_x,
-            share_y_encrypted=str(share_y),
-            hmac="fake-hmac",
+            share_y_encrypted=share_y_str,
+            hmac=generate_hmac(share_y_str),
             is_submitted=False
         )
+
         db.add(share)
 
     db.commit()
 
     return {"message": "Shares generated successfully"}
+
+@admin_router.post("/tamper-share")
+def tamper_share(share_x: int, value: str, db: Session = Depends(get_db)):
+
+    share = db.query(Share).filter(Share.share_x == share_x).first()
+
+    if not share:
+        return {"error": "Share not found"}
+
+    share.share_y_encrypted = value
+
+    db.commit()
+
+    return {"message": "tampered successfully"}
