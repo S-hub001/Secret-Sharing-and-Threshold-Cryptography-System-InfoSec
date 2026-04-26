@@ -201,105 +201,108 @@ Attack 4: Insider collusion simulation
 
 ## ⚙️ Execution & Testing 
 
-*** Step 1: Run Project
+***Step 1: Run Project***
 uvicorn app:app --reload
-
 Open:
+*http://127.0.0.1:8000/docs*
 
-http://127.0.0.1:8000/docs
-
-*** Step 2: Generate Key
-POST /admin/generate-key
+***Step 2: Generate Key***
+*POST /admin/generate-key*
 k = 3
 n = 5
-*** Step 3: Submit Shares
-POST /executive/submit-share?share_x=1
-POST /executive/submit-share?share_x=2
-POST /executive/submit-share?share_x=3
 
-*** Step 4: Normal Reconstruction
-POST /executive/reconstruct
+***Step 3: Submit Shares***
+*POST /executive/submit-share?share_x=1*
+*POST /executive/submit-share?share_x=2*
+*POST /executive/submit-share?share_x=3*
 
-✔ Secret successfully reconstructed if valid shares exist
+***Step 4: Normal Reconstruction***
+*POST /executive/reconstruct*
+
+**✔ Secret successfully reconstructed if valid shares exist**
+
+---
 
 ### 💣 ATTACK SIMULATIONS (WEB TESTING)
 
-*** ATTACK 1 — Insufficient Shares
-*** Method:
-Submit only 2 shares when k = 3
+**🔴ATTACK 1 — Insufficient Shares**
+***Method:***
+--> Submit only 2 shares when k = 3
 *POST /executive/reconstruct*
-Result:
-ERROR: Not enough shares submitted
-Why:
 
+**Result:**
+*ERROR: Not enough shares submitted*
+Why:
 Threshold condition fails.
 
-🔴 ATTACK 2 — Share Tampering
-Method:
-POST /admin/tamper-share
+**🔴 ATTACK 2 — Share Tampering**
+***Method:***
+*POST /admin/tamper-share*
 
 Modify share_y manually
 
 Then:
+*POST /executive/reconstruct*
 
-POST /executive/reconstruct
-Result:
-ERROR: Tampered share detected
+***Result:***
+*ERROR: Tampered share detected*
 Why:
-
 HMAC verification fails.
 
-🔴 ATTACK 3 — Brute Force Attack
-Method:
-POST /executive/attack/bruteforce
-Result:
-FAILED: computationally infeasible
+**🔴 ATTACK 3 — Brute Force Attack**
+***Method:***
+*POST /executive/attack/bruteforce*
+
+***Result:***
+*FAILED: computationally infeasible*
+
 Why brute force does NOT work:
-Shamir uses polynomial of degree k-1
+**Shamir uses polynomial of degree k-1
 With less than k shares:
-Infinite possible solutions exist
+Infinite possible solutions exist**
 Search space:
-p
-(k−1)
+p^(k−1)
 
-👉 Practically impossible for large prime fields (e.g., 256-bit)
+**👉 Practically impossible for large prime fields (e.g., 256-bit)**
 
-✔ So attacker cannot guess secret
+***✔ So attacker cannot guess secret***
 
-🔴 ATTACK 4 — Insider Collusion Attack
+**🔴 ATTACK 4 — Insider Collusion Attack**
 Method:
-POST /executive/attack/insider
-Simulation:
+*POST /executive/attack/insider*
+***Simulation:***
 Only 2 executives collude
 System enforces:
-threshold check
+**threshold check
 HMAC validation
-duplicate detection
-Result:
+duplicate detection**
+
+***Result:***
 BLOCKED OR FAILED
-Why insider attack fails:
+
+**Why insider attack fails:
 Less than k shares reveal NOTHING
 Polynomial cannot be reconstructed
-Even colluding users gain no information
-🧠 IMPORTANT SECURITY INSIGHT
-Attack Type	Result
-Insufficient shares	Blocked
-Tampering	Detected via HMAC
-Brute force	Computationally impossible
-Insider collusion	No information leakage
-📊 LOGGING SYSTEM
+Even colluding users gain no information**
 
-All events logged in:
 
-system_logs.txt
+***📊 LOGGING SYSTEM***
+All events are logged in:
 
-Logs include:
+**system_logs.txt**
 
-Reconstruction attempts
-Failed authentication
-Tampered share detection
-Attack attempts (3 & 4)
-
+***some logs are listed:***
+*2026-04-27 00:50:30.046588 - ATTACK 3 started: brute force attempt
+2026-04-27 00:50:30.047155 - ATTACK 3: attacker has 2/3 shares
+2026-04-27 00:50:30.047595 - ATTACK 3 FAILED: search space is exponential (p^(k-1))
+2026-04-27 00:50:47.884109 - ATTACK 4 started: insider collusion
+2026-04-27 00:50:47.898490 - ATTACK 4: only 2 shares used
+2026-04-27 00:50:47.899225 - ATTACK 4 FAILED: insufficient threshold shares
+2026-04-27 00:56:52.181469 - Share 1 submitted
+2026-04-27 00:56:57.030835 - Share 2 submitted
+2026-04-27 00:57:02.427562 - Share 2 submitted
+2026-04-27 00:57:12.359514 - ATTACK 4 started: insider collusion
+2026-04-27 00:57:12.364466 - ATTACK 4: reconstruction attempted with valid shares*
 
 ---
 
