@@ -212,22 +212,22 @@ http://127.0.0.1:8000/docs
 POST /admin/generate-key
 k = 3
 n = 5
-🔹 Step 3: Submit Shares
+*** Step 3: Submit Shares
 POST /executive/submit-share?share_x=1
 POST /executive/submit-share?share_x=2
 POST /executive/submit-share?share_x=3
-🔹 Step 4: Normal Reconstruction
+
+*** Step 4: Normal Reconstruction
 POST /executive/reconstruct
 
 ✔ Secret successfully reconstructed if valid shares exist
 
-💣 ATTACK SIMULATIONS (WEB TESTING)
-🔴 ATTACK 1 — Insufficient Shares
-Method:
+### 💣 ATTACK SIMULATIONS (WEB TESTING)
 
+*** ATTACK 1 — Insufficient Shares
+*** Method:
 Submit only 2 shares when k = 3
-
-POST /executive/reconstruct
+*POST /executive/reconstruct*
 Result:
 ERROR: Not enough shares submitted
 Why:
