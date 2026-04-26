@@ -307,17 +307,17 @@ Why insider attack fails:
 **system_logs.txt**
 
 ***some logs are listed:***
-- 2026-04-27 00:50:30.046588 - ATTACK 3 started: brute force attempt
-- 2026-04-27 00:50:30.047155 - ATTACK 3: attacker has 2/3 shares
-- 2026-04-27 00:50:30.047595 - ATTACK 3 FAILED: search space is exponential (p^(k-1))
-- 2026-04-27 00:50:47.884109 - ATTACK 4 started: insider collusion
-- 2026-04-27 00:50:47.898490 - ATTACK 4: only 2 shares used
-- 2026-04-27 00:50:47.899225 - ATTACK 4 FAILED: insufficient threshold shares
-- 2026-04-27 00:56:52.181469 - Share 1 submitted
-- 2026-04-27 00:56:57.030835 - Share 2 submitted
-- 2026-04-27 00:57:02.427562 - Share 2 submitted
-- 2026-04-27 00:57:12.359514 - ATTACK 4 started: insider collusion
-- 2026-04-27 00:57:12.364466 - ATTACK 4: reconstruction attempted with valid shares*
+- *2026-04-27 00:50:30.046588 - ATTACK 3 started: brute force attempt*
+- *2026-04-27 00:50:30.047155 - ATTACK 3: attacker has 2/3 shares*
+- *2026-04-27 00:50:30.047595 - ATTACK 3 FAILED: search space is exponential (p^(k-1))*
+- *2026-04-27 00:50:47.884109 - ATTACK 4 started: insider collusion*
+- *2026-04-27 00:50:47.898490 - ATTACK 4: only 2 shares used*
+- *2026-04-27 00:50:47.899225 - ATTACK 4 FAILED: insufficient threshold shares*
+- *2026-04-27 00:56:52.181469 - Share 1 submitted*
+- *2026-04-27 00:56:57.030835 - Share 2 submitted*
+- *2026-04-27 00:57:02.427562 - Share 2 submitted*
+- *2026-04-27 00:57:12.359514 - ATTACK 4 started: insider collusion*
+- *2026-04-27 00:57:12.364466 - ATTACK 4: reconstruction attempted with valid shares*
 
 ---
 
