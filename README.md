@@ -20,22 +20,28 @@ The system is divided into **four** main modules:
 ```
 Secret-Sharing-and-Threshold-Cryptography-System-InfoSec/
 │
-├── app.py
-├── database.py
-├── models.py
-├── schemas.py
-├── security.py
-├── crypto_engine.py  (temporary)
+├── database/
+│   └── secret_sharing.db
 │
 ├── routes/
 │   ├── admin.py
 │   └── executive.py
 │
-├── database/
-│   └── secret_sharing.db   (will be created when app runs)
-|
-└── utils/
-    └── aes_service.py
+├── utils/
+│   ├── aes_service.py
+│   └── hmac_service.py
+│
+├── .gitignore
+├── app.py
+├── crypto_engine.py
+├── database.py
+├── logger.py
+├── models.py
+├── README.md
+├── schemas.py
+├── security_attacks.py
+├── security.py
+├── system_logs.txt
 ```
 
 ---
