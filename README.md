@@ -166,15 +166,15 @@ This module focuses on system security, integrity protection, and attack simulat
 - Verified before reconstruction
 #### ✔ Purpose:
 Prevents:
-Share tampering
-Data modification attacks
+- Share tampering
+- Data modification attacks
 
 ---
 
 ### 2. Threshold Security Enforcement
-System uses Shamir Secret Sharing (k-of-n)
-Minimum k shares required for reconstruction
-Global threshold controlled via admin module
+- System uses Shamir Secret Sharing (k-of-n)
+- Minimum k shares required for reconstruction
+- Global threshold controlled via admin module
 
 ---
 
@@ -182,20 +182,20 @@ Global threshold controlled via admin module
 
 #### Before reconstructing secret:
 ##### System verifies:
-✔ Threshold condition (k shares required)
-✔ HMAC integrity of each share
-✔ Valid numeric format of shares
-✔ No duplicate share usage
+- ✔ Threshold condition (k shares required)
+- ✔ HMAC integrity of each share
+- ✔ Valid numeric format of shares
+- ✔ No duplicate share usage
 
 ---
 
 ### 4. Attack Simulation Module
 
 #### Implements controlled red-team attacks:
-Attack 1: Insufficient shares
-Attack 2: Share tampering
-Attack 3: Brute force feasibility analysis
-Attack 4: Insider collusion simulation
+- Attack 1: Insufficient shares
+- Attack 2: Share tampering
+- Attack 3: Brute force feasibility analysis
+- Attack 4: Insider collusion simulation
 
 ---
 
