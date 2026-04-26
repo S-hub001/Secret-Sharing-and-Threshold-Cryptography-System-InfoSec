@@ -204,12 +204,11 @@ Prevents:
 ***Step 1: Run Project***
 - uvicorn app:app --reload
 - Open:
-- *http://127.0.0.1:8000/docs*
+  *http://127.0.0.1:8000/docs*
 
 ***Step 2: Generate Key***
 - *POST /admin/generate-key*
-- k = 3
-- n = 5
+- k = 3 and n = 5
 
 ***Step 3: Submit Shares***
 - *POST /executive/submit-share?share_x=1*
@@ -230,11 +229,13 @@ Prevents:
 - --> Submit only 2 shares when k = 3
 - *POST /executive/reconstruct*
 
-- **Result:**
+**Result:**
 - *ERROR: Not enough shares submitted*
   
 Why:
 - Threshold condition fails.
+
+  ---
 
 **🔴 ATTACK 2 — Share Tampering**
 ***Method:***
@@ -251,6 +252,8 @@ Then:
   
 Why:
 - HMAC verification fails.
+
+  ---
 
 **🔴 ATTACK 3 — Brute Force Attack**
 ***Method:***
@@ -273,6 +276,8 @@ Search space:
 
 ***✔ So attacker cannot guess secret***
 
+---
+
 **🔴 ATTACK 4 — Insider Collusion Attack**
 
 Method:
@@ -294,6 +299,7 @@ Why insider attack fails:
 - Polynomial cannot be reconstructed
 - Even colluding users gain no information**
 
+---
 
 ***📊 LOGGING SYSTEM***
 -All events are logged in:
