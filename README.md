@@ -410,12 +410,52 @@ Why insider attack fails:
 - *2026-04-27 00:57:12.364466 - ATTACK 4: reconstruction attempted with valid shares*
 
 ---
-
+ 
 # 👩‍💻 Frontend Layer & Integration (Member 4)
-*add your part*
+
 ## 📌 Responsibilities
+This module acts as the bridging layer of the system. It provides an intuitive, responsive user interface (UI) to make complex cryptographic processes accessible, while ensuring seamless end-to-end integration between the frontend forms, the backend APIs, and the database.
+
 ## ✨ Features Implemented
+
+### 1. Unified Management Dashboard
+- Designed a centralized interface for both administrative tasks and executive operations.
+- Dynamic data rendering allows users to view system statuses, active thresholds, and total generated shares in real time.
+
+### 2. Administrator Panel
+- **Key Generation Form:** Interface to trigger master key generation, define total shares ($n$), and set the required recovery threshold ($k$).
+- **User Creation Portal:** Secure forms to register new system users and assign specific system roles (Admin vs. Executive).
+- **Interactive Share Viewer:** Displays administrative tools to view generated shares and manually trigger tampering events for security audits.
+
+### 3. Executive Operations Portal
+- **Secure Share Submission Form:** An optimized input module where executives can securely paste their assigned numeric points.
+- **Visual Status Tracker:** A real-time threshold progress bar that dynamically updates to show exactly how many more shares are needed to reach the threshold $k$.
+- **Reconstruction Module:** A one-click execution interface that collects submitted shares, verifies validation tokens, and displays the successfully recovered plaintext Master Key.
+
+### 4. Integration & Error Handling
+- Built a secure client-side API handler that communicates directly with the FastAPI backend via asynchronous AJAX/Fetch requests.
+- Integrated dynamic validation alerts to catch input issues early (e.g., malformed keys, empty values, or duplicate entries) before making server calls.
+- Full CORS integration mapping to ensure secure, trouble-free local hosting (`http://127.0.0.1:8000`).
+
 ## ⚙️ Execution & Testing 
+
+***Step 1: Launch the API Backend***
+Before launching the frontend, ensure your backend server is up and running:
+```bash
+uvicorn app:app --reload
+```
+
+***Step 2: Launch the Frontend***
+1. Open the project root folder.
+2. Locate the file named `index.html` (or your main frontend template).
+3. **Option A:** Right-click the file and open it directly in your browser.
+4. **Option B (Recommended):** Use the VS Code **Live Server** extension to launch it at `http://127.0.0.1:5500` to prevent local file routing issues.
+
+***Step 3: End-to-End Test Workflow***
+1. Open the Admin Panel UI and create three test users.
+2. Generate a key with $n=5$ and $k=3$.
+3. Navigate to the Executive Panel UI and submit three valid shares.
+4. Click **Reconstruct Key** and verify that the original Master Key matches the generated output.
 
 ---
 
