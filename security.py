@@ -1,40 +1,35 @@
 """
 security.py
 
-Fixed version:
-- Avoids bcrypt 72-byte limit issue
-- Still secure for project use
+Uses bcrypt directly — no passlib (passlib is incompatible with bcrypt 4.x).
+Flow: SHA-256(password) → bcrypt hash
 """
 
-from passlib.context import CryptContext
 import hashlib
-
-pwd_context = CryptContext(
-    schemes=["bcrypt"],
-    deprecated="auto"
-)
+import bcrypt
 
 
-def normalize_password(password: str) -> str:
+def normalize_password(password: str) -> bytes:
     """
-    Prevent bcrypt 72-byte issue by hashing input first.
-    This ensures fixed-length safe input.
+    SHA-256 hash the password and return as bytes.
+    Output is always 32 bytes — well under bcrypt's 72-byte limit.
     """
-    return hashlib.sha256(password.encode()).hexdigest()
+    return hashlib.sha256(password.encode("utf-8")).digest()  # 32 raw bytes
 
 
 def hash_password(password: str) -> str:
     """
-    Hash password safely using:
-    SHA-256 → bcrypt
+    Hash password safely: SHA-256 → bcrypt
+    Returns a string for storing in the database.
     """
-    safe_password = normalize_password(password)
-    return pwd_context.hash(safe_password)
+    safe = normalize_password(password)
+    hashed = bcrypt.hashpw(safe, bcrypt.gensalt())
+    return hashed.decode("utf-8")
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """
-    Verify password using same transformation.
+    Verify password using the same SHA-256 → bcrypt transformation.
     """
-    safe_password = normalize_password(plain_password)
-    return pwd_context.verify(safe_password, hashed_password)
+    safe = normalize_password(plain_password)
+    return bcrypt.checkpw(safe, hashed_password.encode("utf-8"))

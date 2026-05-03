@@ -45,96 +45,12 @@ Secret-Sharing-and-Threshold-Cryptography-System-InfoSec/
 ```
 
 ---
+
 # ⛓️ Cryptographic Engine (Member 1)
-
+*add your part*
 ## 📌 Responsibilities
-This module is the heart of the entire system. It implements all low-level
-cryptographic primitives required for Shamir's Secret Sharing — completely
-from scratch using finite field mathematics, with no reliance on external
-secret-sharing libraries.
-
 ## ✨ Features Implemented
-
-### 1. Finite Field Arithmetic — GF(P)
-All arithmetic operates over a 256-bit prime field:
-P = 2^256 - 189
-Functions implemented:
-- `mod_add(a, b)` — Addition mod P
-- `mod_sub(a, b)` — Subtraction mod P
-- `mod_mul(a, b)` — Multiplication mod P
-- `mod_inv(a)`    — Modular inverse via Fermat's Little Theorem: `a^(P−2) mod P`
-- `mod_div(a, b)` — Division as `a × b⁻¹ mod P`
-> All values are guaranteed to stay within GF(P), preventing overflow and
-> ensuring cryptographic correctness.
-
-
-### 2. Share Generation
-```python
-def generate_shares(secret: bytes, k: int, n: int) -> List[Tuple[int, int]]
-```
-**Steps:**
-1. Convert secret bytes → integer representation
-2. Generate `k−1` cryptographically random coefficients using `secrets.randbelow(P)`
-3. Construct polynomial:
-   `f(x) = secret + a₁x + a₂x² + ... + a(k-1)x^(k-1) mod P`
-4. Evaluate at `x = 1, 2, ..., n` to produce n shares `(x, f(x))`
-**Optimisation:** Polynomial evaluation uses **Horner's Method** — reduces
-multiplications from O(k²) to O(k).
-
-**Security:** Each run produces different shares for the same secret due to
-freshly randomized coefficients — indistinguishable from random to any
-attacker holding fewer than k shares.
-
-
-### 3. Secret Reconstruction — Lagrange Interpolation
-```python
-def reconstruct_secret(shares: List[Tuple[int, int]], secret_length: int) -> bytes
-```
-Reconstructs the secret at `x = 0` using the Lagrange formula:
-S = Σ [ yⱼ × Lⱼ(0) ]  mod P
-Where:
-Lⱼ(0) = Π [ xₘ / (xₘ − xⱼ) ]  for all m ≠ j,  mod P
-
-Built-in protections:
-- ✔ Detects and rejects **duplicate shares** before reconstruction
-- ✔ Requires minimum of **2 shares** (enforced)
-- ✔ Tampered shares produce a **wrong result** — never the real secret
-
-
-### 4. Helper Utilities (used by Backend / API Layer)
-| Function | Purpose |
-|---|---|
-| `generate_random_secret(n)` | Generates a cryptographically secure n-byte secret |
-| `hash_secret(secret)` | SHA-256 fingerprint for verification without exposing the secret |
-| `verify_reconstruction(a, b)` | Constant-time comparison to confirm reconstruction succeeded |
-
----
-
-## ⚙️ Execution & Testing
-
-**File:** `crypto_engine.py` and `test_shamir.py`
-
-### Run Tests
-python test_shamir.py
-### Test Suites (32 tests — all passing)
-
-| Suite | Tests | Coverage |
-|---|---|---|
-| Finite Field Arithmetic | 10 | `mod_add`, `mod_sub`, `mod_mul`, `mod_inv`, `mod_div`, wrap-around, zero edge case |
-| Share Generation | 7 | Count, x-values, field bounds, randomness, validation errors |
-| Reconstruction (Lagrange) | 8 | 3-of-5 success, 2-of-5 failure, subset consistency, duplicate detection, tamper detection |
-| Helpers & Edge Cases | 7 | Random secret generation, hash consistency/uniqueness, full round-trip |
-
-### Key Test Cases
-
-| Test | Expected Result |
-|---|---|
-| 3-of-5 threshold | ✔ Secret reconstructed correctly |
-| 2-of-5 (below threshold) | ✔ Wrong result — secret NOT revealed |
-| Duplicate share submitted | ✔ `ValueError` raised |
-| Modified/tampered share | ✔ Reconstruction fails — wrong secret |
-| Full round-trip (32-byte key) | ✔ `verify_reconstruction()` confirms match |
-
+## ⚙️ Execution & Testing 
 
 ---
 
@@ -216,6 +132,7 @@ venv\Scripts\activate
 ***Step 3: Install Dependencies***
 ```
 pip install fastapi uvicorn sqlalchemy passlib[bcrypt] cryptography python-multipart python-jose
+pip install python-jose[cryptography]
 ```
 ***Step 4: Run the app***
 ```

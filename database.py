@@ -14,7 +14,7 @@ from sqlalchemy.orm import sessionmaker
 
 # SQLite database URL
 # This will create a file named secret_sharing.db in your project folder
-DATABASE_URL = "sqlite:///./database/secret_sharing.db"
+DATABASE_URL = "sqlite:///./secret.db"
 
 # Create SQLAlchemy engine
 # connect_args is required only for SQLite

@@ -1,41 +1,65 @@
 """
-app.py
-
-Main entry point of FastAPI application.
+app.py - Main entry point with auth router + default admin seeding
 """
-
-from fastapi import FastAPI, Depends
-from database import SessionLocal
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from database import SessionLocal, engine
 from models import Base, User
-from database import engine, get_db
-from models import Base
 from routes.admin import admin_router
 from routes.executive import executive_router
-from sqlalchemy.orm import Session
+from auth import auth_router
+from security import hash_password
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
-# Create FastAPI app
-app = FastAPI()
+app = FastAPI(title="VaultKey — Secret Sharing System")
 
-# Create database tables automatically
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 Base.metadata.create_all(bind=engine)
 
-# routers for admin and executive operations
+# Register all routers
+app.include_router(auth_router)
 app.include_router(admin_router)
 app.include_router(executive_router)
 
-# Root endpoint to verify API is running
+
+@app.on_event("startup")
+def seed_default_admin():
+    """
+    Creates a default admin user on first run if none exists.
+    Username: admin   Password: admin123
+    """
+    db = SessionLocal()
+    try:
+        existing = db.query(User).filter(User.role == "admin").first()
+        if not existing:
+            default_admin = User(
+                name="admin",
+                role="admin",
+                password_hash=hash_password("admin123")
+            )
+            db.add(default_admin)
+            db.commit()
+            print("✅ Default admin created — username: admin | password: admin123")
+        else:
+            print(f"✅ Admin already exists: {existing.name}")
+    finally:
+        db.close()
+
+
 @app.get("/")
 def read_root():
-    return {"message": "Secret Sharing Backend Running"}
+    return {"message": "VaultKey — Secret Sharing Backend Running"}
 
 
-# Test route to verify database connection and insertion
-@app.get("/test-db")
-def test_db():
-    db = SessionLocal()
-    new_user = User(name="Admin1", role="admin", password_hash="test")
-    db.add(new_user)
-    db.commit()
-    db.close()
-    return {"message": "User inserted"}
-
+# add this AFTER all your routers
+@app.get("/ui")
+def serve_frontend():
+    return FileResponse("frontend.html")

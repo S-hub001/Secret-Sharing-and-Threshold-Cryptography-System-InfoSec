@@ -116,3 +116,85 @@
 2026-04-27 00:57:02.427562 - Share 2 submitted
 2026-04-27 00:57:12.359514 - ATTACK 4 started: insider collusion
 2026-04-27 00:57:12.364466 - ATTACK 4: reconstruction attempted with valid shares
+2026-05-02 03:26:50.234905 - Share 1 submitted
+2026-05-02 03:26:51.664524 - Share 2 submitted
+2026-05-02 03:27:00.811165 - Share 1 submitted
+2026-05-02 03:27:05.398973 - Share 2 submitted
+2026-05-02 03:27:54.555220 - ATTACK 3 started: brute force attempt
+2026-05-02 03:27:54.557226 - ATTACK 3: attacker has 2/3 shares
+2026-05-02 03:27:54.557226 - ATTACK 3 FAILED: search space is exponential (p^(k-1))
+2026-05-02 03:27:58.239559 - ATTACK 4 started: insider collusion
+2026-05-02 03:27:58.243050 - ATTACK 4 BLOCKED: only 2/3 shares — insufficient
+2026-05-02 03:38:09.241571 - Submit failed: Share 999 not found
+2026-05-02 03:38:09.262722 - Share 1 submitted
+2026-05-02 03:38:09.275789 - Reconstruction attempt started
+2026-05-02 03:38:09.276298 - Reconstruction failed: insufficient shares
+2026-05-02 03:38:09.314759 - Share 1 submitted
+2026-05-02 03:38:09.321558 - Share 2 submitted
+2026-05-02 03:38:09.326501 - Reconstruction attempt started
+2026-05-02 03:38:09.326501 - Reconstruction failed: insufficient shares
+2026-05-02 03:38:09.343357 - Reconstruction attempt started
+2026-05-02 03:38:09.343357 - Reconstruction failed: insufficient shares
+2026-05-02 03:38:09.365189 - Share 1 submitted
+2026-05-02 03:38:09.371809 - Share 2 submitted
+2026-05-02 03:38:09.380137 - Share 3 submitted
+2026-05-02 03:38:09.381145 - Reconstruction attempt started
+2026-05-02 03:38:09.385642 - Reconstruction failed: insufficient shares
+2026-05-02 03:38:09.399673 - Share 1 submitted
+2026-05-02 03:38:09.408472 - Share 2 submitted
+2026-05-02 03:38:09.412184 - Share 3 submitted
+2026-05-02 03:38:09.428710 - Reconstruction attempt started
+2026-05-02 03:38:09.428710 - Tampered share detected: 2
+2026-05-02 03:38:09.443362 - Share 1 submitted
+2026-05-02 03:38:09.453404 - Share 2 submitted
+2026-05-02 03:38:09.454656 - Share 3 submitted
+2026-05-02 03:38:09.462043 - Reconstruction attempt started
+2026-05-02 03:38:09.462043 - Tampered share detected: 2
+2026-05-02 03:38:09.525234 - ATTACK 3 started: brute force attempt
+2026-05-02 03:38:09.525234 - ATTACK 3: attacker has 2/3 shares
+2026-05-02 03:38:09.525234 - ATTACK 3 FAILED: search space is exponential (p^(k-1))
+2026-05-02 03:38:09.535296 - ATTACK 3 started: brute force attempt
+2026-05-02 03:38:09.536003 - ATTACK 3: attacker has 2/3 shares
+2026-05-02 03:38:09.538009 - ATTACK 3 FAILED: search space is exponential (p^(k-1))
+2026-05-02 03:38:09.554115 - ATTACK 3 started: brute force attempt
+2026-05-02 03:38:09.554115 - ATTACK 3: attacker has 2/3 shares
+2026-05-02 03:38:09.554115 - ATTACK 3 FAILED: search space is exponential (p^(k-1))
+2026-05-02 03:38:09.569339 - Share 1 submitted
+2026-05-02 03:38:09.571466 - ATTACK 4 started: insider collusion
+2026-05-02 03:38:09.571466 - ATTACK 4 BLOCKED: tampered share detected 1
+2026-05-02 03:38:09.592469 - Share 1 submitted
+2026-05-02 03:38:09.593977 - Share 2 submitted
+2026-05-02 03:38:09.593977 - Share 3 submitted
+2026-05-02 03:38:09.608733 - ATTACK 4 started: insider collusion
+2026-05-02 03:38:09.608733 - ATTACK 4 BLOCKED: tampered share detected 1
+2026-05-02 03:38:09.619490 - Share 1 submitted
+2026-05-02 03:38:09.619490 - Share 2 submitted
+2026-05-02 03:38:09.636132 - Share 3 submitted
+2026-05-02 03:38:09.640146 - Reconstruction attempt started
+2026-05-02 03:38:09.640146 - Tampered share detected: 1
+2026-05-02 03:38:09.652725 - Share 1 submitted
+2026-05-02 03:38:09.667253 - Share 2 submitted
+2026-05-02 03:38:09.673967 - Reconstruction attempt started
+2026-05-02 03:38:09.677223 - Tampered share detected: 1
+2026-05-02 03:38:09.691115 - Share 1 submitted
+2026-05-02 03:38:09.710158 - Share 2 submitted
+2026-05-02 03:38:09.710158 - Share 3 submitted
+2026-05-02 03:38:09.722525 - Share 4 submitted
+2026-05-02 03:38:09.733001 - Share 5 submitted
+2026-05-02 03:38:09.735926 - Reconstruction attempt started
+2026-05-02 03:38:09.735926 - Tampered share detected: 1
+2026-05-02 03:38:09.756991 - Share 1 submitted
+2026-05-02 03:38:09.756991 - Share 2 submitted
+2026-05-02 03:38:09.756991 - Share 3 submitted
+2026-05-02 03:38:09.774116 - Reconstruction attempt started
+2026-05-02 03:38:09.774116 - Tampered share detected: 1
+2026-05-02 03:38:09.785654 - Share 1 submitted
+2026-05-02 03:38:09.785654 - Share 2 submitted
+2026-05-02 03:38:09.798929 - Share 3 submitted
+2026-05-02 03:38:09.798929 - Reconstruction attempt started
+2026-05-02 03:38:09.798929 - Tampered share detected: 1
+2026-05-02 03:48:04.634412 - Share 4 submitted
+2026-05-02 03:48:08.446318 - Reconstruction attempt started
+2026-05-02 03:48:08.446318 - Tampered share detected: 1
+2026-05-02 03:48:16.266794 - ATTACK 4 started: insider collusion
+2026-05-02 03:48:16.269009 - ATTACK 4 BLOCKED: tampered share detected 1
